@@ -1,0 +1,234 @@
+{
+    "schema" : [
+        {
+            "survey_question":"Você atua na empresa como:",
+            "column": "atua_como",
+            "desc": "Consultor ou colaborador interno",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Qual provedor de cloud escolhido?",
+            "column": "provedor",
+            "desc": "Provedor de cloud ",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Qual dos seguintes tópicos representaram o maior desafio do projeto em relação a migração dos dados?",
+            "column": "maior_desafio",
+            "desc": "Maior desafio",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Qual tamanho da equipe?",
+            "column": "tam_equipe",
+            "desc": "Tamanho da equipe",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Em uma escala de avaliação, qual nota você atribui para a entrega do projeto?",
+            "column": "avaliacao",
+            "desc": "Escala 1 a 5",
+            "dtype": "int"
+        },
+        {
+            "survey_question":"Qual o porte?",
+            "column": "porte",
+            "desc": "Porte da empresa",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Informe qual intervalo a seguir melhor representa o investimento total em recursos utilizados no projeto de Data Lake que você estava envolvido?",
+            "column": "tam_investimento",
+            "desc": "Tamanho do valor do investimento ",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Qual item a seguir melhor descreve sua posição no projeto:",
+            "column": "posicao",
+            "desc": "Posição de gestão ou desenvolvimento ",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"A empresa atua com qual segmentação de clientes?",
+            "column": "segmentacao",
+            "desc": "Segmentação da empresa",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Quanto tempo custou o desenvolvimento da  primeira entrega?",
+            "column": "tempo",
+            "desc": "Tempo de projeto",
+            "dtype": "categorical"
+        },
+        {
+            "survey_question":"Marque quais metodologias ágeis foram utilizadas no projeto de desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_mtd_scrum",
+            "desc": "Flag usou scrum",
+            "dtype": "bool",
+            "apply_contains":"Scrum"
+        },
+        {
+            "survey_question":"Marque quais metodologias ágeis foram utilizadas no projeto de desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_mtd_kanban",
+            "desc": "Flag usou kanban",
+            "dtype": "bool",
+            "apply_contains":"Kanban"
+        },
+        {
+            "survey_question":"Marque quais metodologias ágeis foram utilizadas no projeto de desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_mtd_okr",
+            "desc": "Flag usou OKR",
+            "dtype": "bool",
+            "apply_contains":"OKR"
+        },
+        {
+            "survey_question":"Marque quais metodologias ágeis foram utilizadas no projeto de desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_mtd_safe",
+            "desc": "Flag usou SAFe ",
+            "dtype": "bool",
+            "apply_contains":"Scaled Agile Framework"
+        },
+        {
+            "survey_question":"Marque quais metodologias ágeis foram utilizadas no projeto de desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_mtd_classica",
+            "desc": "Flag usou metódologia clássica",
+            "dtype": "bool",
+            "apply_contains":"Nenhuma metodologia ágil foi utilizada"
+        },
+        {
+            "survey_question":"Quais foram os tipos de dados solicitados para ingestão?",
+            "column": "bool_src_sql",
+            "desc": "Flag origem SQL",
+            "dtype": "bool",
+            "apply_contains":"Bases SQL"
+        },
+        {
+            "survey_question":"Quais foram os tipos de dados solicitados para ingestão?",
+            "column": "bool_src_api",
+            "desc": "Flag origem API ",
+            "dtype": "bool",
+            "apply_contains":"API"
+        },
+        {
+            "survey_question":"Quais foram os tipos de dados solicitados para ingestão?",
+            "column": "bool_src_nosql",
+            "desc": "Flag origem NOSQL",
+            "dtype": "bool",
+            "apply_contains":"Bases NoSQL"
+        },
+        {
+            "survey_question":"Quais foram os tipos de dados solicitados para ingestão?",
+            "column": "bool_src_outros",
+            "desc": "Flag outras origens",
+            "dtype": "bool",
+            "apply_contains":"Outros"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "bool_alt_eqp",
+            "desc": "Flag equipe alterada ",
+            "dtype": "bool",
+            "apply_contains":"Alteração da equipe de desenvolvimento"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "bool_alt_bd",
+            "desc": "Flag bancos de dados redefinidos",
+            "dtype": "bool",
+            "apply_contains":"Redefinição dos bancos de dados que migraram para a nuvem"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "bool_alt_sol",
+            "desc": "Flag alteração de solução contratada",
+            "dtype": "bool",
+            "apply_contains":"Alteração das soluções contratadas (up-grade ou redução de soluções)"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "bool_alt_custo",
+            "desc": "Flag alteração do custo inicial do escopo ",
+            "dtype": "bool",
+            "apply_contains":"Alteração no custo inicial do escopo do projeto"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "bool_alt_tec",
+            "desc": "Flag alteração na tecnologia para atender a solução",
+            "dtype": "bool",
+            "apply_contains":"Alteração de infraestrutura tecnológica para atender o projeto"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_gov",
+            "desc": "Flag falha de governança de dados",
+            "dtype": "bool",
+            "apply_contains":"Falha na implantação da governança dos dados"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_dev",
+            "desc": "Flag falha planejamento das etapas do desenvolvimento",
+            "dtype": "bool",
+            "apply_contains":"Falha no planejamento em relação às etapas"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_aus_info",
+            "desc": "Flag falha por ausência de informações",
+            "dtype": "bool",
+            "apply_contains":"Falha pela ausência de banco de dados (informações)"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_pln_custo",
+            "desc": "Flag falha de planejamento de custos",
+            "dtype": "bool",
+            "apply_contains":"Falha no planejamento de custo relacionado à infraestrutura e manutenção"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_gst_lid",
+            "desc": "Flag falha gestão ou liderança",
+            "dtype": "bool",
+            "apply_contains":"Falha na gestão/liderança da equipe para executar o projeto"
+        },
+        {
+            "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
+            "column": "bool_falha_usu",
+            "desc": "Flag falha na capacidade de utilização por parte dos analistas ",
+            "dtype": "bool",
+            "apply_contains":"Falha na capacidade de utilização do data lake pelos analistas da empresa"
+        },
+        {
+            "survey_question":"As partes envolvidas no projeto possuem certificação para atuar com o provedor escolhido?",
+            "column": "bool_cert",
+            "desc": "Flag profissional certificado",
+            "dtype": "bool"
+        },
+        {
+            "survey_question":"Houve ingestão de streaming de dados?",
+            "column": "bool_src_stream",
+            "desc": "Flag houve ingestão de streaming de dados",
+            "dtype": "bool"
+        },
+        {
+            "survey_question":"Você possui experiência prévia com esse tipo de solução?",
+            "column": "bool_experiencia",
+            "desc": "Flag profssional tem experiência prévia com projeto",
+            "dtype": "bool"
+        },
+        {
+            "survey_question":"Você possui experiência prévia com esse tipo de solução?",
+            "column": "qt_falha",
+            "desc": "Flag houve qualquer falha",
+            "dtype": "int"
+        },
+        {
+            "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
+            "column": "qt_alt",
+            "desc": "Flag houve qualquer alteração",
+            "dtype": "int"
+        }
+    ]
+}
