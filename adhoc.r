@@ -22,9 +22,4 @@ cor(data[, c('avaliacao',
            'qt_alteracoes', 
            'qt_falhas')])
 
-library(psych)
-pairs.panels(data[, 
-                  c('avaliacao', 
-                    'qt_alteracoes', 
-                    'qt_falhas'
-                  )],)
+
