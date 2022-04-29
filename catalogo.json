@@ -142,7 +142,7 @@
             "column": "bool_alt_sol",
             "desc": "Flag alteração de solução contratada",
             "dtype": "bool",
-            "apply_contains":"Alteração das soluções contratadas (up-grade ou redução de soluções)"
+            "apply_contains":"Alteração das soluções contratadas"
         },
         {
             "survey_question":"Se você respondeu SIM para a questão anterior, por gentileza, indique abaixo quais alterações ocorreram no escopo do projeto.",
@@ -177,7 +177,7 @@
             "column": "bool_falha_aus_info",
             "desc": "Flag falha por ausência de informações",
             "dtype": "bool",
-            "apply_contains":"Falha pela ausência de banco de dados (informações)"
+            "apply_contains":"Falha pela ausência de banco de dados"
         },
         {
             "survey_question":"Indique abaixo quais foram as principais falhas que ocorreram no desenvolvimento da solução de Data Lake na nuvem em sua empresa",
