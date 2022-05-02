@@ -38,8 +38,10 @@ data <- subset(data, select = -c(
   bool_falha_aus_info,
   bool_falha_pln_custo,
   bool_falha_gst_lid,
-  bool_falha_usu))
+  bool_falha_usu,
+  avaliacao))
 
+summary(data)
 modelo_qt_falhas <- lm(qt_falhas ~ . , data)
 
 step_modelo_qt_falhas <- step(modelo_qt_falhas, k = 3.841459)
@@ -102,3 +104,11 @@ data %>%
 
 
 summary(step_modelo_qt_falhas_bc)
+
+
+install.packages("relaimpo")
+library(relaimpo)
+
+relImportance <- calc.relimp(step_modelo_qt_falhas_bc, type = "lmg", rela = TRUE)
+importances <- sort(relImportance$lmg, decreasing=TRUE)
+sort(relImportance$lmg, decreasing=TRUE)

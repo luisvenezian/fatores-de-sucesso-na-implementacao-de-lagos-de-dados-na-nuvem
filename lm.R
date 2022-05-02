@@ -31,38 +31,42 @@ data <- dummy_columns(.data = data,
                        remove_selected_columns = T,
                        remove_most_frequent_dummy = T)
 
+###
+### MODELO 1 - LM
+###
 # modelo de regressão linear em função da avaliação do projeto
 modelo_avaliacao <- lm(avaliacao ~ ., data)
 
+# stepwise
 step_modelo_avaliacao <- step(modelo_avaliacao, k = 3.841459)
 
-export_summs(step_modelo_avaliacao, scale = F, digits = 5)
-
-# box-cox
-lambda_bc <- powerTransform(data$avaliacao) #função powerTransform do pacote car#
-
-#Inserindo o lambda de Box-Cox na base de dados para a estimação de um novo modelo
+###
+### MODELO 2 -LM com BOX-COX 
+###
+lambda_bc <- powerTransform(data$avaliacao) 
 data$avaliacao_bc <- (((data$avaliacao ^ lambda_bc$lambda) - 1) / 
                         lambda_bc$lambda)
-
 modelo_avaliacao_bc <- lm(avaliacao_bc ~ . - avaliacao, data)
 
+# stepwise 
 step_modelo_avaliacao_bc <- step(modelo_avaliacao_bc, k = 3.841459)
 
 
-# Resumo dos dois modelos obtidos pelo procedimento Stepwise (linear e com Box-Cox)
-# Função export_summs do pacote jtools
-export_summs(step_modelo_avaliacao_bc, step_modelo_avaliacao, scale = F, digits = 6)
+# resumo dos dois modelos obtidos 
+export_summs(
+  step_modelo_avaliacao_bc, 
+  step_modelo_avaliacao, 
+  scale = F, 
+  digits = 6)
 
-summary(step_modelo_avaliacao)
 
+# criando uma variavel com os valores de avaliação calculados pelos modelos
 data$yhat_step_modelo_avaliacao <- step_modelo_avaliacao$fitted.values
 data$yhat_step_modelo_avaliacao_bc <- (((step_modelo_avaliacao_bc$fitted.values*(lambda_bc$lambda))+
                                     1))^(1/(lambda_bc$lambda))
 
 
-#Visualizando os dois fitted values no dataset
-#modelos step_empresas e step_modelo_bc
+# visualizando graficamente tb
 data %>%
   select(avaliacao, yhat_step_modelo_avaliacao, yhat_step_modelo_avaliacao_bc) %>%
   kable() %>%
@@ -92,3 +96,26 @@ data %>%
         panel.border = element_rect(NA),
         legend.position = "bottom")
 
+
+# visualizando importância relativa de cada variavel no R²
+library(caret)
+varImp(step_modelo_avaliacao)
+?varImp
+# https://www.youtube.com/watch?v=CXG_1O-EWps
+
+library(relaimpo)
+
+relative_importance <- calc.relimp(step_modelo_avaliacao, type="lmg")$lmg
+
+df = data.frame(
+variable=names(relative_importance),
+importance=round(c(relative_importance) * 100,2)
+)
+
+ggplot(df, aes(x = reorder(variable, -importance), y = importance)) +
+  geom_col(fill = "deepskyblue4") + 
+  geom_text(aes(label=importance), vjust=.3, hjust=1.2, size=3, color="white")+
+  coord_flip() +
+  labs(title = "Relative importance of variables",
+       subtitle = "Main factors for consider when creating data lakes") +
+  theme_classic(base_size = 16)
