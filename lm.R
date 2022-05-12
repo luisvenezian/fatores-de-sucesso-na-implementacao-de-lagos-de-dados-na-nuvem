@@ -117,5 +117,151 @@ ggplot(df, aes(x = reorder(variable, -importance), y = importance)) +
   geom_text(aes(label=importance), vjust=.3, hjust=1.2, size=3, color="white")+
   coord_flip() +
   labs(title = "Relative importance of variables",
-       subtitle = "Main factors for consider when creating data lakes") +
+       subtitle = "Key factors that influence the evaluation of this \ndata lake projects survey") +
   theme_classic(base_size = 16)
+
+install.packages("hrbrthemes")
+library(hrbrthemes)
+
+# Análise da avaliação em função das variáveis que mais explicam o R² 
+data$bool_falha_dev <-factor(data$bool_falha_dev, levels=c(0,1), labels=c("Não", "Sim"))
+data$bool_cert <- factor(data$bool_cert, levels=c(0,1), labels=c("Não","Sim"))
+data$bool_falha_usu <- factor(data$bool_falha_usu, levels=c(0,1), labels=c("Não","Sim"))
+data$bool_falha_aus_info <- factor(data$bool_falha_aus_info, levels=c(0,1), labels=c("Não","Sim"))
+data$bool_mtd_classica <- factor(data$bool_mtd_classica, levels=c(0,1), labels=c("Não","Sim"))
+data$`tam_equipe_]10,20]` <- factor(data$`tam_equipe_]10,20]`, levels=c(0,1), labels=c("Não","Sim"))
+
+p_bool_cert <- round(t.test(subset(data, bool_cert = "Não")$avaliacao, subset(data, bool_cert == "Sim")$avaliacao)$p.value, 6)
+
+
+
+
+p_bool_falha_dev <- round(t.test(data[data$bool_falha_dev == "Não",]$avaliacao, data[data$bool_falha_dev == "Sim",]$avaliacao)$p.value, 6)
+p_bool_cert <- round(t.test(data[data$bool_cert == "Não",]$avaliacao, data[data$bool_cert == "Sim",]$avaliacao)$p.value, 6)
+p_bool_falha_usu <- round(t.test(data[data$bool_falha_usu == "Não",]$avaliacao, data[data$bool_falha_usu == "Sim",]$avaliacao)$p.value, 6)
+p_bool_falha_aus_info <- round(t.test(data[data$bool_falha_aus_info == "Não",]$avaliacao, data[data$bool_falha_aus_info == "Sim",]$avaliacao)$p.value, 6)
+p_bool_mtd_classica <- round(t.test(data[data$bool_mtd_classica == "Não",]$avaliacao, data[data$bool_mtd_classica == "Sim",]$avaliacao)$p.value, 6)
+p_bool_mtd_tam_equipe <- round(t.test(data[data$`tam_equipe_]10,20]` == "Não",]$avaliacao, data[data$`tam_equipe_]10,20]` == "Sim",]$avaliacao)$p.value, 6)
+
+
+library(ggpubr)
+
+plot_falha_dev <- ggdotplot(data, x = "bool_falha_dev", y = "avaliacao",
+                color = "bool_falha_dev", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = bool_falha_dev), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Falha no desenvolvimento\nP Value: ", round(p_bool_falha_dev, 6)),
+      " - Percentual de Confiança: ", 100 - (p_bool_falha_dev * 100)
+    )) +
+    theme_ipsum() +
+    theme(
+      legend.position="none",
+      plot.title = element_text(size=14),
+      axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain"),
+    ) + 
+    xlab("")
+
+plot_certificado <- ggdotplot(data, x = "bool_cert", y = "avaliacao",
+                            color = "bool_cert", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = bool_cert), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Possuí certificação\nP Value: ", round(p_bool_cert, 6)),
+      " - Percentual de Confiança: ", 100 - (p_bool_cert * 100)
+    )) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain")
+  ) + 
+  xlab("")
+
+
+plot_falha_usu <- ggdotplot(data, x = "bool_falha_usu", y = "avaliacao",
+                              color = "bool_falha_usu", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = bool_falha_usu), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Falha com usuário \nP Value: ", round(p_bool_falha_usu, 6)),
+      " - Percentual de Confiança: ", 100 - (p_bool_falha_usu * 100)
+    )) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain")
+  ) + 
+  xlab("")
+
+plot_aus_info <- ggdotplot(data, x = "bool_falha_aus_info", y = "avaliacao",
+                            color = "bool_falha_aus_info", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = bool_falha_aus_info), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Falha de ausência de informação\nP Value: ", round(p_bool_falha_aus_info, 6)),
+      " - Percentual de Confiança: ", 100 - (p_bool_falha_aus_info * 100)
+    )) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain")
+  ) + 
+  xlab("")
+
+plot_gestao_classica <- ggdotplot(data, x = "bool_mtd_classica", y = "avaliacao",
+                           color = "bool_mtd_classica", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = bool_mtd_classica), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Usou metodologia clássica\nP Value: ", round(p_bool_mtd_classica, 6)),
+      "    Percentual de Confiança: ", 100 - (p_bool_mtd_classica * 100)
+    )
+  ) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain")
+  ) + 
+  xlab("")
+plot_gestao_classica
+
+
+plot_tam_equipe <- ggdotplot(data, x = "tam_equipe_]10,20]", y = "avaliacao",
+                                  color = "tam_equipe_]10,20]", binwidth = .1) +
+  theme_ipsum() +
+  geom_violin(aes(colour = `tam_equipe_]10,20]`), size=.3, fill="black", alpha = .03)+
+  ggtitle(
+    paste(
+      paste("Equipe de 10 a 20 pessoas.\nP Value: ", round(p_bool_mtd_tam_equipe, 6)),
+      "    Percentual de Confiança: ", 100 - (p_bool_mtd_tam_equipe * 100)
+    )
+  ) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=14),
+    axis.title.y = element_text(size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain")
+  ) + 
+  xlab("")
+
+
+
+
+ggarrange(plot_falha_dev + font("title", size = 10),
+          plot_gestao_classica + font("title", size = 10),
+          plot_aus_info + font("title", size = 10),
+          plot_falha_usu + font("title", size = 10),
+          plot_certificado + font("title", size = 10), 
+          plot_tam_equipe + font("title", size = 10),
+          # labels = c("A", "B", "C"),
+          ncol = 2, nrow = 3)
+
